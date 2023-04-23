@@ -1,5 +1,6 @@
 package com.padm.ambigest.login
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.text.style.UnderlineSpan
 import android.widget.TextView
 import androidx.core.text.toSpannable
 import com.padm.ambigest.R
+import com.padm.ambigest.recoverPassword.RecoverPasswordActivity
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
@@ -29,5 +31,10 @@ class LoginActivity : AppCompatActivity() {
         spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
         tvForgotPassword.text = spannableString;
 
+
+        tvForgotPassword.setOnClickListener {
+            val intent = Intent(this, RecoverPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
