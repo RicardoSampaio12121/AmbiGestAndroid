@@ -6,22 +6,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.padm.ambigest.R
+import com.padm.ambigest.databinding.FragmentSignupVerifyCodeBinding
 
-class SignupVerifyCodeFragment : Fragment() {
+class SignupVerifyCodeFragment : Fragment(R.layout.fragment_signup_verify_code) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+    private lateinit var binding: FragmentSignupVerifyCodeBinding
 
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup_verify_code, container, false)
+        binding = FragmentSignupVerifyCodeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+
+            confirmRegisterClButton.setOnClickListener{
+                if(!verifyInputs()){
+                    //TODO: Add a toast here
+                    return@setOnClickListener
+                }
+
+                //TODO: Call method to confirm code
+                val tmpResult = true
+
+
+            }
+        }
+    }
+
+    private fun verifyInputs(): Boolean{
+        return true
     }
 
     companion object {

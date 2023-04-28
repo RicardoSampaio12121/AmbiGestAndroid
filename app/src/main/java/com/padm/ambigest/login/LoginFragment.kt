@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.padm.ambigest.R
 import com.padm.ambigest.databinding.FragmentLoginBinding
 import com.padm.ambigest.recoverPassword.RecoverPasswordActivity
+import com.padm.ambigest.services.firebase.FirebaseAuthentication
+import com.padm.ambigest.services.firebase.databaseModels.NewUserModel
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -42,12 +44,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
 
                 loginClSignupButton.setOnClickListener{
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .add(R.id.login_fl_view,
-                            SignupVerifyCodeFragment.newInstance(),
-                            SIGNUP_VERIFY_CODE_FRAG_TAG)
-                        .addToBackStack(SIGNUP_VERIFY_CODE_FRAG_TAG)
-                        .commit()
+                    //TODO: This will eventually have to be injected instead of created here
+                    val service = FirebaseAuthentication(requireActivity())
+
+                    service.registerUser(NewUserModel(loginEtEmail.text.toString(),
+                        loginEtPassword.text.toString())) { checker ->
+                        if(checker){
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .add(R.id.login_fl_view,
+                                    SignupVerifyCodeFragment.newInstance(),
+                                    SIGNUP_VERIFY_CODE_FRAG_TAG)
+                                .addToBackStack(SIGNUP_VERIFY_CODE_FRAG_TAG)
+                                .commit()
+                        }
+                        else{
+                            //TODO: Do something here, dunno what makes sense tbh
+                        }
+                    }
                 }
             }
     }
