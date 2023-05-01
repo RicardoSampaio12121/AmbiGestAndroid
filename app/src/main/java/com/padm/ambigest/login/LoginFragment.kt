@@ -11,8 +11,10 @@ import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import com.padm.ambigest.R
 import com.padm.ambigest.databinding.FragmentLoginBinding
+import com.padm.ambigest.mainActivity.MainActivity
 import com.padm.ambigest.recoverPassword.RecoverPasswordActivity
 import com.padm.ambigest.services.firebase.FirebaseAuthentication
+import com.padm.ambigest.services.firebase.databaseModels.LoginUserModel
 import com.padm.ambigest.services.firebase.databaseModels.NewUserModel
 
 
@@ -50,17 +52,30 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     service.registerUser(NewUserModel(loginEtEmail.text.toString(),
                         loginEtPassword.text.toString())) { checker ->
                         if(checker){
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .add(R.id.login_fl_view,
-                                    SignupVerifyCodeFragment.newInstance(),
-                                    SIGNUP_VERIFY_CODE_FRAG_TAG)
-                                .addToBackStack(SIGNUP_VERIFY_CODE_FRAG_TAG)
-                                .commit()
+                            //TODO: Do something here, or delete this entire if else block
                         }
                         else{
                             //TODO: Do something here, dunno what makes sense tbh
                         }
                     }
+                }
+
+                loginClLogin.setOnClickListener{
+                    //TODO: This will eventually have to be injected instead of created here
+                    val service = FirebaseAuthentication(requireActivity())
+
+                    service.loginUser(LoginUserModel(loginEtEmail.text.toString(),
+                        loginEtPassword.text.toString())){ checker ->
+
+                        if(checker){
+                            val intent = Intent(requireActivity(), MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        else{
+                            //TODO: Do something here
+                        }
+                    }
+
                 }
             }
     }
