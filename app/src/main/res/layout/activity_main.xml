@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FEFEFE"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainActivity.MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <!--    TODO: Maybe change the color of the stroke-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,9 +90,10 @@
 
             <TextView
                 android:id="@+id/main_tv_score"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="13.1"
+                android:text="13"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="40sp"
@@ -107,36 +114,36 @@
 
                 <ImageView
                     android:id="@+id/main_iv_star1"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_star_border_24"
                     />
 
                 <ImageView
                     android:id="@+id/main_iv_star2"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_star_border_24"
                     />
 
                 <ImageView
                     android:id="@+id/main_iv_star3"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_star_border_24"
                     />
 
                 <ImageView
                     android:id="@+id/main_iv_star4"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_star_border_24"
                     />
 
                 <ImageView
                     android:id="@+id/main_iv_star5"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_star_border_24"
                     />
             </LinearLayout>
@@ -152,6 +159,8 @@
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
         <FrameLayout
             android:id="@+id/main_fl_score_message"
             android:layout_width="match_parent"
@@ -160,6 +169,37 @@
             android:background="@drawable/main_cl_score_message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_cl_score"/>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:background="@drawable/main_ll_small_box"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/main_cl_score"
+            app:layout_constraintBottom_toBottomOf="@id/main_cl_score"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ultimos 30 dias"
+                android:textSize="18sp"
+                android:textColor="#2D3142"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0.3 m3"
+                android:textColor="#FA5757"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/main_tv_score_msg1"
@@ -199,7 +239,7 @@
     <LinearLayout
         android:id="@+id/main_ll_optionsButtons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
@@ -208,41 +248,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-<!--        TODO: Fix these buttons aspect -->
-        <com.google.android.material.button.MaterialButton
+        <!--        TODO: Fix these buttons aspect -->
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="5dp"
             android:layout_weight="1"
-            android:text="Meus Pedidos"
+            android:text="Meus                                                 Pedidos"
+            android:textColor="#499D2F"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center"
             android:background="@drawable/main_button_selected"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"/>
 
-        <Button
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Leituras"
+            android:textColor="#8A90A3"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"/>
 
-        <Button
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:maxLines="1"
-            android:text="Vantagens"/>
+            android:text="Vantagens"
+            android:textColor="#8A90A3"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rv_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_ll_optionsButtons"/>
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
+
+
