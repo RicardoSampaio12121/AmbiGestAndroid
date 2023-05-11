@@ -12,13 +12,12 @@ import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: RVPickupItemsAdapter
-
-    private var requests: MutableList<MyRequestModel> = ArrayList()
+    val MAIN_HOME_FRAG_TAG = "mainHomeFragTag"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
         //TODO FOR MAIN ACTIVITY
@@ -33,20 +32,13 @@ class MainActivity : AppCompatActivity() {
 
         //Mocked data
 
-        for (n in 1..10){
-            requests.add(MyRequestModel("none", "item $n", LocalDate.now()))
-        }
-
-        //------------------------------
-
-        startRecyclerView()
-
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.main_fl_page,
+                HomeFragment.newInstance(),
+                MAIN_HOME_FRAG_TAG)
+            .commit()
     }
 
-    private fun startRecyclerView(){
-        val recyclerViewItems = findViewById<RecyclerView>(R.id.main_rv_rv)
 
-        recyclerViewItems.layoutManager = LinearLayoutManager(this)
-        recyclerViewItems.adapter = RVPickupItemsAdapter(requests)
-    }
 }
