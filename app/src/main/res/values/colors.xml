@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FEFEFE</color>
 
+    <color name="card">#115976</color>
+    <color name="green">#3BED04</color>
+    <color name="lightGreen">#71C4C3</color>
+    <color name="lightPurple">#88A1E1</color>
+    <color name="lightRed">#EE6E59</color>
 </resources>
