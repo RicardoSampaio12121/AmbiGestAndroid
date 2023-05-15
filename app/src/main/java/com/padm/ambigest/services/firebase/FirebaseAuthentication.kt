@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseUser
 import com.padm.ambigest.services.firebase.databaseModels.LoginUserModel
 import com.padm.ambigest.services.firebase.databaseModels.NewUserModel
 
@@ -22,7 +24,17 @@ class FirebaseAuthentication(private val context: Context) {
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful){
                     //Something here
-                    auth.currentUser!!.sendEmailVerification()
+                    val newUser: FirebaseUser = task.result!!.user!!
+
+                    newUser.sendEmailVerification().addOnCompleteListener{
+                        if(it.isSuccessful){
+                            Toast.makeText(context, "Verify your email!", Toast.LENGTH_SHORT).show()
+                            onComplete(true)
+                        }else{
+                            Toast.makeText(context, "There was a problem verifying your email.", Toast.LENGTH_SHORT).show()
+                            onComplete(false)
+                        }
+                    }
 
                     Toast.makeText(context, "Email verification sent!", Toast.LENGTH_LONG).show()
                     onComplete(true)
@@ -40,13 +52,35 @@ class FirebaseAuthentication(private val context: Context) {
         auth.signInWithEmailAndPassword(loginUserModel.email, loginUserModel.password)
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful){
-                    //TODO: Add some toast here
-                    onComplete(true)
+
+                    val user = task.result.user
+
+                    if(!user!!.isEmailVerified) {
+                        Toast.makeText(context, "Please, verify your email.", Toast.LENGTH_SHORT).show()
+                        onComplete(false)
+                    }
+                    else{
+                        onComplete(true)
+                    }
                 }
                 else{
-                    //TODO: Add some toast here
                     onComplete(false)
                 }
             }
     }
+
+    fun recoverPassword(email: String, onComplete: (checker: Boolean) -> Unit){
+        auth = Firebase.auth
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener{
+                if(it.isSuccessful){
+                    onComplete(true)
+                }else{
+                    onComplete(false)
+                }
+            }
+    }
+
+
 }
