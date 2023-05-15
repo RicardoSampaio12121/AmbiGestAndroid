@@ -21,6 +21,7 @@ import org.w3c.dom.Text
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_login)
 
         val LOGIN_FRAG_FRAG_TAG = "loginFragFragTag"

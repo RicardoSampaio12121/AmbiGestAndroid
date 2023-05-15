@@ -3,10 +3,8 @@ package com.padm.ambigest.mainActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.type.DateTime
 import com.padm.ambigest.databinding.ActivityMainPickupRvItemBinding
 import com.padm.ambigest.mainActivity.mainModels.MyRequestModel
-import java.time.LocalDate
 
 class RVPickupItemsAdapter(var items: MutableList<MyRequestModel>): RecyclerView.Adapter<RVPickupItemsAdapter.ToDoViewHolder>() {
 
@@ -30,6 +28,7 @@ class RVPickupItemsAdapter(var items: MutableList<MyRequestModel>): RecyclerView
 
 
             //---------
+
 
             mainRvItemTvName.text = items[position].name
             mainRvItemTvDate.text = items[position].date.toString()
