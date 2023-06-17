@@ -1,0 +1,95 @@
+Index: app/src/main/java/com/padm/ambigest/mainActivity/HomeFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.padm.ambigest.mainActivity\r\n\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.padm.ambigest.R\r\nimport com.padm.ambigest.mainActivity.mainModels.MyRequestModel\r\nimport java.time.LocalDate\r\n\r\nclass HomeFragment : Fragment() {\r\n    private lateinit var adapter: RVPickupItemsAdapter\r\n\r\n    private var requests: MutableList<MyRequestModel> = ArrayList()\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        arguments?.let {\r\n        }\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        // Inflate the layout for this fragment\r\n\r\n        for (n in 1..10){\r\n            requests.add(MyRequestModel(\"none\", \"item $n\", LocalDate.now()))\r\n        }\r\n\r\n        //------------------------------\r\n\r\n\r\n        return inflater.inflate(R.layout.fragment_home, container, false)\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n\r\n        startRecyclerView()\r\n    }\r\n\r\n    private fun startRecyclerView(){\r\n        val recyclerViewItems = requireActivity().findViewById<RecyclerView>(R.id.main_rv_rv)\r\n\r\n        recyclerViewItems.layoutManager = LinearLayoutManager(requireContext())\r\n        recyclerViewItems.adapter = RVPickupItemsAdapter(requests)\r\n    }\r\n\r\n    companion object {\r\n        @JvmStatic\r\n        fun newInstance() =\r\n            HomeFragment().apply {\r\n                arguments = Bundle().apply {\r\n                }\r\n            }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/padm/ambigest/mainActivity/HomeFragment.kt b/app/src/main/java/com/padm/ambigest/mainActivity/HomeFragment.kt
+--- a/app/src/main/java/com/padm/ambigest/mainActivity/HomeFragment.kt	(revision effcc9aa6b1a2a2e2fbf767bbdc7a1f7a605c08c)
++++ b/app/src/main/java/com/padm/ambigest/mainActivity/HomeFragment.kt	(date 1686411301014)
+@@ -8,6 +8,7 @@
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import androidx.recyclerview.widget.RecyclerView
+ import com.padm.ambigest.R
++import com.padm.ambigest.externalServices.httpClient.HttpClient
+ import com.padm.ambigest.mainActivity.mainModels.MyRequestModel
+ import java.time.LocalDate
+ 
+@@ -15,6 +16,7 @@
+     private lateinit var adapter: RVPickupItemsAdapter
+ 
+     private var requests: MutableList<MyRequestModel> = ArrayList()
++    private val httpClientService = HttpClient()
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -38,12 +40,17 @@
+         return inflater.inflate(R.layout.fragment_home, container, false)
+     }
+ 
++    private fun FetchWaterReadingsData() {
++        val waterReadings = httpClientService.sendGetRequest();
++    }
++
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+ 
+         startRecyclerView()
+     }
+ 
++
+     private fun startRecyclerView(){
+         val recyclerViewItems = requireActivity().findViewById<RecyclerView>(R.id.main_rv_rv)
+ 
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'org.jetbrains.kotlin.android'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.padm.ambigest'\r\n    compileSdk 33\r\n\r\n    viewBinding {\r\n        enabled = true\r\n    }\r\n\r\n    defaultConfig {\r\n        applicationId \"com.padm.ambigest\"\r\n        minSdk 24\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = '1.8'\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.core:core-ktx:1.7.0'\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.8.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'com.google.firebase:firebase-auth-ktx:21.0.2'\r\n    implementation 'com.google.firebase:firebase-firestore-ktx:24.5.0'\r\n    implementation 'com.google.firebase:firebase-auth:21.0.2'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision effcc9aa6b1a2a2e2fbf767bbdc7a1f7a605c08c)
++++ b/app/build.gradle	(date 1686410650914)
+@@ -46,6 +46,7 @@
+     implementation 'com.google.firebase:firebase-auth-ktx:21.0.2'
+     implementation 'com.google.firebase:firebase-firestore-ktx:24.5.0'
+     implementation 'com.google.firebase:firebase-auth:21.0.2'
++    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+Index: app/src/main/java/com/padm/ambigest/externalServices/httpClient/HttpClient.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/padm/ambigest/externalServices/httpClient/HttpClient.kt b/app/src/main/java/com/padm/ambigest/externalServices/httpClient/HttpClient.kt
+new file mode 100644
+--- /dev/null	(date 1686410886515)
++++ b/app/src/main/java/com/padm/ambigest/externalServices/httpClient/HttpClient.kt	(date 1686410886515)
+@@ -0,0 +1,22 @@
++package com.padm.ambigest.externalServices.httpClient
++
++import okhttp3.OkHttpClient
++import okhttp3.Request
++import java.io.IOException
++
++class HttpClient {
++    private val client = OkHttpClient()
++
++    fun sendGetRequest(url: String): String {
++        val request = Request.Builder()
++            .url(url)
++            .build()
++
++        client.newCall(request).execute().use { response ->
++            if(!response.isSuccessful)
++                throw IOException("Unexpected http code: " + response.code)
++
++            return response.body?.string() ?: throw IOException("Response body is null")
++        }
++    }
++}
+\ No newline at end of file
