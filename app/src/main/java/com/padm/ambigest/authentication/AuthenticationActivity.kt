@@ -11,6 +11,7 @@ import com.padm.ambigest.login.LoginActivity
 class AuthenticationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_authentication)
 
         val tvUseEmail = findViewById<TextView>(R.id.authentication_tv_useEmail)

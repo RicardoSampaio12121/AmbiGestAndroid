@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.type.DateTime
 import com.padm.ambigest.databinding.ActivityMainPickupRvItemBinding
 import com.padm.ambigest.mainActivity.mainModels.MyRequestModel
+import com.padm.ambigest.services.firebase.httpClient.Models.PickupModel
+import com.padm.ambigest.services.firebase.httpClient.Models.WaterReadingModel
 import java.time.LocalDate
 
-class RVPickupItemsAdapter(var items: MutableList<MyRequestModel>): RecyclerView.Adapter<RVPickupItemsAdapter.ToDoViewHolder>() {
+class RVPickupItemsAdapter(var items: MutableList<PickupModel>): RecyclerView.Adapter<RVPickupItemsAdapter.ToDoViewHolder>() {
 
     inner class ToDoViewHolder(val binding: ActivityMainPickupRvItemBinding): RecyclerView.ViewHolder(binding.root){
             init {
@@ -16,6 +18,10 @@ class RVPickupItemsAdapter(var items: MutableList<MyRequestModel>): RecyclerView
             }
         }
 
+    fun updateData(newData: MutableList<PickupModel>) {
+        items = newData
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder{
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,14 +31,7 @@ class RVPickupItemsAdapter(var items: MutableList<MyRequestModel>): RecyclerView
 
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int){
         holder.binding.apply {
-            //Mock data
 
-
-
-            //---------
-
-            mainRvItemTvName.text = items[position].name
-            mainRvItemTvDate.text = items[position].date.toString()
         }
     }
 

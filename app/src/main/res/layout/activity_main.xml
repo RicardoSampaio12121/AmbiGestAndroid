@@ -33,6 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/main_tv_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,6 +44,7 @@
             android:drawableTint="#499D2F"/>
 
         <TextView
+            android:id="@+id/main_tv_consultas"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,6 +55,7 @@
             android:drawableTint="#C8CCD8"/>
 
         <TextView
+            android:id="@+id/main_tv_preferences"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

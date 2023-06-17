@@ -1,18 +1,24 @@
 package com.padm.ambigest.mainActivity
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.padm.ambigest.R
-import com.padm.ambigest.mainActivity.mainModels.MyRequestModel
-import java.time.LocalDate
+import com.padm.ambigest.consultas.consultasFragment
+import com.padm.ambigest.preferences.PreferencesFragment
 
 class MainActivity : AppCompatActivity() {
 
-    val MAIN_HOME_FRAG_TAG = "mainHomeFragTag"
+    private val MAIN_HOME_FRAG_TAG = "mainHomeFragTag"
+    private val MAIN_CONSULTAS_FRAG_TAG= "mainConsultasFragTag"
+    private val MAIN_PREFERENCES_FRAG_TAG= "mainPreferencesFragTag"
+
+    private lateinit var homeButton: TextView
+    private lateinit var consultasButton: TextView
+    private lateinit var preferencesButton: TextView
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,17 +26,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
-        //TODO FOR MAIN ACTIVITY
-        //1- make stars bigger
-        //2- have to get an image with half a star filled and a full star filled
-        //3- make the circle to always be completely round
-        //4- Add that square thing between the circle and the congratulations box
-        //5- Make those 3 buttons look good
-        //6- Implement the recyclerView items with mocked data to see how it looks like | DONE
-        //7- Change the color of the circle border
-        //8- Probably have to make the whole thing scrollable instead of just the recyclerView
-
-        //Mocked data
+        homeButton = findViewById(R.id.main_tv_home)
+        consultasButton = findViewById(R.id.main_tv_consultas)
+        preferencesButton = findViewById(R.id.main_tv_preferences)
 
         supportFragmentManager.beginTransaction()
             .add(
@@ -38,7 +36,67 @@ class MainActivity : AppCompatActivity() {
                 HomeFragment.newInstance(),
                 MAIN_HOME_FRAG_TAG)
             .commit()
+
+        consultasButton.setOnClickListener{
+
+
+            if(supportFragmentManager.findFragmentByTag(MAIN_CONSULTAS_FRAG_TAG) != null)
+                return@setOnClickListener
+
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.main_fl_page,
+                    consultasFragment.newInstance(),
+                    MAIN_CONSULTAS_FRAG_TAG)
+                .commit()
+            changeMenuButtonsAppearance(1)
+        }
+
+        homeButton.setOnClickListener{
+            if(supportFragmentManager.findFragmentByTag(MAIN_HOME_FRAG_TAG) != null)
+                return@setOnClickListener
+
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.main_fl_page,
+                    HomeFragment.newInstance(),
+                    MAIN_HOME_FRAG_TAG
+                )
+                .commit()
+
+            changeMenuButtonsAppearance(0)
+        }
+
+        preferencesButton.setOnClickListener{
+            if(supportFragmentManager.findFragmentByTag(MAIN_PREFERENCES_FRAG_TAG) != null)
+                return@setOnClickListener
+
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.main_fl_page,
+                    PreferencesFragment.newInstance(),
+                    MAIN_PREFERENCES_FRAG_TAG
+                )
+                .commit()
+
+            changeMenuButtonsAppearance(2)
+        }
     }
 
+    private fun changeMenuButtonsAppearance(active: Int) {
+        val inactiveColor = ContextCompat.getColor(this, R.color.menuInactive)
+        val activeColor = ContextCompat.getColor(this, R.color.menuActive)
 
+        homeButton.setTextColor(if (active == 0) activeColor else inactiveColor)
+        homeButton.setHintTextColor(if (active == 0) activeColor else inactiveColor)
+        homeButton.compoundDrawables[0]?.setTint(if (active == 0) activeColor else inactiveColor)
+
+        consultasButton.setTextColor(if (active == 1) activeColor else inactiveColor)
+        consultasButton.setHintTextColor(if (active == 1) activeColor else inactiveColor)
+        consultasButton.compoundDrawables[0]?.setTint(if (active == 1) activeColor else inactiveColor)
+
+        preferencesButton.setTextColor(if (active == 2) activeColor else inactiveColor)
+        preferencesButton.setHintTextColor(if (active == 2) activeColor else inactiveColor)
+        preferencesButton.compoundDrawables[0]?.setTint(if (active == 2) activeColor else inactiveColor)
+    }
 }

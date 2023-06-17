@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FEFEFE</color>
-
+    <color name="home_selected_button">#499D2F</color>
+    <color name="home_unselected_button">#8A90A3</color>
+    <color name="menuActive">#499D2F</color>
+    <color name="menuInactive">#C8CCD8</color>
 </resources>

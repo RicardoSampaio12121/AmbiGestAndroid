@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".preferences.PreferencesFragment">
+
+    <TextView
+        android:id="@+id/preferences_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="15dp"
+        android:text="Preferencias"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_iv_account" />
+
+    <ImageView
+        android:id="@+id/preferences_iv_account"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="15dp"
+        android:src="@drawable/ic_baseline_face_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/preferences_tv_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Conta"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="30dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_personalDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/profile_icon"
+        android:text="Detalhes pessoais"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_account" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_personalDetails"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Permissões"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="30dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_v_supporterView1"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/bell_icon"
+        android:text="Notificações"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_permissions" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_notifications"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_geoConfig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/bell_icon"
+        android:text="Configurações de localização"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_v_supporterView2" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_geoConfig"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_others"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Outros"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="30dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_v_supporterView3"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_helpCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/help_icon"
+        android:text="Centro de ajuda"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_others" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_helpCenter"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/terms_condition_icon"
+        android:text="Privacidade, termos e condições"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_v_supporterView4" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_privacy"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/preferences_tv_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/logout_icon"
+        android:text="Logout"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preferences_v_supporterView5" />
+
+    <View
+        android:id="@+id/preferences_v_supporterView6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F2F9"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@id/preferences_tv_logout"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

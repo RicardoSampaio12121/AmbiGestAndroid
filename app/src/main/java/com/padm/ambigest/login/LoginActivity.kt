@@ -21,6 +21,7 @@ import org.w3c.dom.Text
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_login)
 
         val LOGIN_FRAG_FRAG_TAG = "loginFragFragTag"
@@ -38,13 +39,12 @@ class LoginActivity : AppCompatActivity() {
 
         val tvTitle = findViewById<TextView>(R.id.login_tv_title)
         tvTitle.text= Html.fromHtml("<font color=${Color.BLACK}>Bem-vindo a um mundo muito melhor com a </font>" +
-                "<font color=${Color.GREEN}> ambiGest!!</font>")
+                "<font color= #65B000> ambiGest!</font>")
 
         val backButton = findViewById<AppCompatImageButton>(R.id.login_ib_back_button)
         backButton.setOnClickListener{
 
-            //TODO: If it's the first fragment of the activity, just finish it
-            supportFragmentManager.popBackStack()
+            this.finish()
         }
     }
 }
