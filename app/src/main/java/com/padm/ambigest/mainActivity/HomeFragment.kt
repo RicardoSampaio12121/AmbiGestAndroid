@@ -54,13 +54,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         startRecyclerView()
 
         lifecycleScope.launch{
-            //val pickupsAsJson = getPickupOrders()
+            val pickupsAsJson = getPickupOrders()
             val readingsAsJson = getWaterReadings()
 
-            //val data = Gson().fromJson<MutableList<PickupModel>>(dataAsJson, object : TypeToken<MutableList<PickupModel>>() {}.type)
+            val pickupsData = Gson().fromJson<MutableList<PickupModel>>(pickupsAsJson, object : TypeToken<MutableList<PickupModel>>() {}.type)
             val readingsData = Gson().fromJson<MutableList<WaterReadingModel>>(readingsAsJson, object : TypeToken<MutableList<WaterReadingModel>>() {}.type)
+
             readingsAdapter.updateData(readingsData)
-            //pickupsAdapter.updateData(data)
+            pickupsAdapter.updateData(pickupsData)
         }
 
         val readingsButton = requireActivity().findViewById<TextView>(R.id.main_tv_readings)
@@ -86,12 +87,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         toUnselect.setTextColor(ContextCompat.getColor(requireContext(), R.color.home_unselected_button))
     }
 
-    private suspend fun getPickupOrders(){
+    private suspend fun getPickupOrders(): String{
         val a: String
-
         withContext(Dispatchers.Default){
             a = httpClientService.Get(Endpoints.GET_PICKUP_ORDERS.label)
         }
+        return a
     }
 
     private suspend fun getWaterReadings(): String{

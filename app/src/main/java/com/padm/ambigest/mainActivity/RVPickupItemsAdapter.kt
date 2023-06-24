@@ -8,7 +8,9 @@ import com.padm.ambigest.databinding.ActivityMainPickupRvItemBinding
 import com.padm.ambigest.mainActivity.mainModels.MyRequestModel
 import com.padm.ambigest.services.firebase.httpClient.Models.PickupModel
 import com.padm.ambigest.services.firebase.httpClient.Models.WaterReadingModel
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.*
 
 class RVPickupItemsAdapter(var items: MutableList<PickupModel>): RecyclerView.Adapter<RVPickupItemsAdapter.ToDoViewHolder>() {
 
@@ -31,7 +33,10 @@ class RVPickupItemsAdapter(var items: MutableList<PickupModel>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int){
         holder.binding.apply {
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
+            mainRvItemTvName.text = "${items[position].type}"
+            mainRvItemTvDate.text = dateFormat.format(items[position].pickupAt).toString()
         }
     }
 
